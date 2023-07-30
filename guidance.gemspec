@@ -1,20 +1,20 @@
-require_relative "lib/guidance_lib/version"
+require_relative "lib/guidance/version"
 
 Gem::Specification.new do |spec|
   spec.name = "guidance"
-  spec.version = GuidanceLib::VERSION
+  spec.version = Guidance::VERSION
   spec.authors = ["Noah Horton"]
   spec.email = ["noah@unsupervised.com"]
 
   spec.summary = "Microsoft Guidance for Ruby"
-  spec.homepage = "https://github.com/Unsupervisedcom/guideance-rails"
+  spec.homepage = "https://github.com/Unsupervisedcom/guideance"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0"
 
   spec.metadata = {
-    "bug_tracker_uri" => "https://github.com/Unsupervisedcom/guideance-rails/issues",
-    "changelog_uri" => "https://github.com/Unsupervisedcom/guideance-rails/releases",
-    "source_code_uri" => "https://github.com/Unsupervisedcom/guideance-rails",
+    "bug_tracker_uri" => "https://github.com/Unsupervisedcom/guideance/issues",
+    "changelog_uri" => "https://github.com/Unsupervisedcom/guideance/releases",
+    "source_code_uri" => "https://github.com/Unsupervisedcom/guideance",
     "homepage_uri" => spec.homepage,
     "rubygems_mfa_required" => "true"
   }

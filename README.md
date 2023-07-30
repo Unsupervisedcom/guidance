@@ -46,6 +46,8 @@ using an env variable for the below:
 ```bash
 export OPENAI_API_KEY=<your key>
 ```
+These keys can be found at https://platform.openai.com/account/api-keys if you
+have an account.
 
 ### Usage
 ```ruby
