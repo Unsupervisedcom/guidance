@@ -2,7 +2,7 @@
 # require File.expand_path("../../lib/guidance.rb", __FILE__)
 require "./lib/guidance"
 # set the default language model used to execute guidance programs
-Guidance.llm = Guidance.llms.OpenAI.new("text-davinci-003")
+Guidance.llm = Guidance.llms.OpenAI("text-davinci-003")
 
 # define a guidance program that adapts a proverb
 program = Guidance::Program.new(
@@ -13,7 +13,7 @@ program = Guidance::Program.new(
 
 UPDATED
 Where there is no guidance{{gen 'rewrite' stop="\\n-"}}
-- GPT {{#select 'chapter'}}9{{or}}10{{or}}11{{/select}}:{{gen 'verse'}}%)
+- GPT {{#select 'chapter'}}9{{or}}10{{or}}11{{/select}}:{{gen 'verse'}})
 )
 
 # execute the program on a specific proverb
@@ -24,4 +24,4 @@ executed_program = program.(
   verse: 14
 )
 
-#executed_program.log
+puts executed_program
