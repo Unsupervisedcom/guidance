@@ -1,6 +1,6 @@
 # This shows how to run the proverbs guidance program in the README on https://github.com/microsoft/guidance
-# require File.expand_path("../../lib/guidance.rb", __FILE__)
-require "./lib/guidance"
+require "./lib/guidance" unless defined?(Guidance)
+
 # set the default language model used to execute guidance programs
 Guidance.llm = Guidance.llms.OpenAI("text-davinci-003")
 

@@ -2,8 +2,8 @@
 # But that seems to be a documented bug in Guidance itself: https://github.com/microsoft/guidance/issues/262
 
 # Ruby version of https://github.com/microsoft/guidance/blob/main/notebooks/chat.ipynb
-require "./lib/guidance"
-# import re
+require "./lib/guidance" unless defined?(Guidance)
+
 Guidance.llm = Guidance.llms.OpenAI("gpt-4")
 
 role_simulator = Guidance::Program.new(%Q(
