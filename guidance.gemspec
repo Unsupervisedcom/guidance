@@ -7,14 +7,14 @@ Gem::Specification.new do |spec|
   spec.email = ["noah@unsupervised.com"]
 
   spec.summary = "Microsoft Guidance for Ruby"
-  spec.homepage = "https://github.com/Unsupervisedcom/guideance"
+  spec.homepage = "https://github.com/Unsupervisedcom/guidance"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0"
 
   spec.metadata = {
-    "bug_tracker_uri" => "https://github.com/Unsupervisedcom/guideance/issues",
-    "changelog_uri" => "https://github.com/Unsupervisedcom/guideance/releases",
-    "source_code_uri" => "https://github.com/Unsupervisedcom/guideance",
+    "bug_tracker_uri" => "https://github.com/Unsupervisedcom/guidance/issues",
+    "changelog_uri" => "https://github.com/Unsupervisedcom/guidance/releases",
+    "source_code_uri" => "https://github.com/Unsupervisedcom/guidance",
     "homepage_uri" => spec.homepage,
     "rubygems_mfa_required" => "true"
   }
