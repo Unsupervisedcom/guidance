@@ -5,10 +5,12 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: |
-    bin/setup
-    pyenv uninstall 3.11.1
-    env PYTHON_CONFIGURE_OPTS='--enable-shared' pyenv install 3.10
-    pyenv global 3.10
-    pip install guidance
-    export PYTHONPATH='/workspace/.pyenv_mirror/user/3.10.9/lib/python3.10/site-packages'
+  - name: Dev
+    init: |
+      bin/setup
+      pyenv uninstall 3.11.1
+      env PYTHON_CONFIGURE_OPTS='--enable-shared' pyenv install 3.10
+      pyenv global 3.10
+      pip install guidance
+    env:
+      PYTHONPATH: '/workspace/.pyenv_mirror/user/3.10.9/lib/python3.10/site-packages'
