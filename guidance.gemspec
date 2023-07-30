@@ -1,8 +1,8 @@
-require_relative "lib/guidance/version"
+require_relative "lib/guidance_lib/version"
 
 Gem::Specification.new do |spec|
   spec.name = "guidance"
-  spec.version = Guidance::VERSION
+  spec.version = GuidanceLib::VERSION
   spec.authors = ["Noah Horton"]
   spec.email = ["noah@unsupervised.com"]
 

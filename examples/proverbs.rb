@@ -1,11 +1,11 @@
 # This shows how to run the proverbs guidance program in the README on https://github.com/microsoft/guidance
-require File.expand_path("../../lib/guidance.rb", __FILE__)
-
+# require File.expand_path("../../lib/guidance.rb", __FILE__)
+require "./lib/guidance"
 # set the default language model used to execute guidance programs
-Guidance.llm = Guidance.llms.OpenAI("text-davinci-003")
+Guidance.llm = Guidance.llms.OpenAI.new("text-davinci-003")
 
 # define a guidance program that adapts a proverb
-program = Guidance.call(
+program = Guidance::Program.new(
   %Q(Tweak this proverb to apply to model instructions instead.
 
 {{proverb}}
@@ -24,4 +24,4 @@ executed_program = program.(
   verse: 14
 )
 
-puts executed_program["rewrite"]
+#executed_program.log
