@@ -1,5 +1,5 @@
-# VERY IMPT: This code kinda works, but it starts getting failures at the end where the input is not making it through.
-# But that seems to be a documented bug in Guidance itself: https://github.com/microsoft/guidance/issues/262
+# Note: There is a workaround in line 29. Details in Guidance issue at
+# https://github.com/microsoft/guidance/issues/278
 
 # Ruby version of https://github.com/microsoft/guidance/blob/main/notebooks/chat.ipynb
 require "./lib/guidance" unless defined?(Guidance)
@@ -26,7 +26,7 @@ Ok, I will follow these instructions.
 {{~! Then the conversation unrolls }}
 {{~#geneach 'conversation' stop=False}}
 {{#user~}}
-User: {{set 'this.input' (await 'input')}}
+User: {{set 'this.input' (await 'input') hidden=False}}
 Comment: Remember, answer as a {{role}}. Start your utterance with {{role}}:
 {{~/user}}
 
