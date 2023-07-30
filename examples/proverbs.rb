@@ -17,7 +17,7 @@ Where there is no guidance{{gen 'rewrite' stop="\\n-"}}
 )
 
 # execute the program on a specific proverb
-executed_program = program.(
+executed_program = program.call(
   proverb: "Where there is no guidance, a people falls,\nbut in an abundance of counselors there is safety.",
   book: "Proverbs",
   chapter: 11,
