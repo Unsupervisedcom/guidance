@@ -16,6 +16,7 @@ See documentation at in the Guidance repo for info on how to use it.
 - [Contribution guide](#contribution-guide)
 
 ## Quick start
+### Install
 This requires a version of python that includes the library version.
 Development has been done using 3.10.9 which can be installed with the below.
 You must also install Guidance.
@@ -23,7 +24,7 @@ You must also install Guidance.
 ```
 env PYTHON_CONFIGURE_OPTS='--enable-shared' pyenv install 3.10
 pyenv global 3.10
-pip install guidance
+pip install -U guidance
 ```
 
 To install the gem using bundle:
@@ -35,10 +36,33 @@ Via Ruby gems directly:
 ```
 $ gem install guidance
 ```
+### Configuration
+You will need to configure credentials for the backing LLM service you use.
+This is not well-documented in Guidance but can be found in the source fairly easy
+such as at https://github.com/microsoft/guidance/blob/d2c5e3cbb730e337b9bee20520eb694bd43e5f38/guidance/llms/_openai.py#L160
+which for OpenAI. For OpenAI (as the most common service), the easiest option is
+using an env variable for the below:
 
+```bash
+export OPENAI_API_KEY=<your key>
+```
+
+### Usage
 ```ruby
 require "guidance"
 ```
+
+## Troubleshooting
+#### Python Not Found
+Make sure you installed with the library version installed. Note that even with that
+option, we have seen issues with Python 3.7 but have not fully analyzed the issue.
+
+#### Guidance module not found
+Make sure you installed the pip module.
+
+PyCall also uses the library version of Python which does not get its paths
+set the same way. Try finding where your guidance library was installed and
+adding it to the ENV var "PYTHONPATH"
 
 ## Support
 
