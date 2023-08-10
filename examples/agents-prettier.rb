@@ -40,11 +40,15 @@ republican = role_simulator.call(role: 'Republican', await_missing: true)
 democrat = role_simulator.call(role: 'Democrat', await_missing: true)
 
 first_question = "What do you think is the best way to stop inflation?"
-republican = republican.call(input: first_question, first_question: nil)
-democrat = democrat.call(input: republican["conversation"][-2]["response"].gsub('Republican: ', ""), first_question: first_question)
+republican.call!(input: first_question, first_question: nil)
+democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republican: ', ""), first_question: first_question)
 2.times do
-  republican = republican.call(input: democrat["conversation"][-2]["response"].gsub('Democrat: ', ''))
-  democrat = democrat.call(input: republican["conversation"][-2]["response"].gsub('Republican: ', ''))
+  republican.call!(input: democrat["conversation"][-2]["response"].gsub('Democrat: ', ''))
+  democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republican: ', ''))
+  # This is an extra demo section to demonstrate serializing and deserializing programs as it is an important
+  # part of the flow that Guidance itself never really shows
+  # stored_republican = republican.serialize
+  # republican = Guidance.deserialize(stored_republican)
 end
 puts('Democrat: ' + first_question)
 democrat['conversation'][0..-2].map do |x|

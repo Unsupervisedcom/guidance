@@ -13,16 +13,17 @@ require_relative "guidance/program"
 require_relative "guidance/llms"
 
 module Guidance
+  include Guidance::Serializer
   autoload :Program, "guidance/program"
   autoload :Version, "guidance/version"
   autoload :LLMs, "guidance/llms"
 
   def self.llm=(llm)
-    @llm = llm
+    write_class_store :llm, llm
     PythonGuidance.llm = llm
   end
 
-  def self.llm = @llm
+  def self.llm = read_class_store :llm
 
   def self.llms = @llms ||= LLMs.new
 
@@ -37,5 +38,13 @@ module Guidance
       python_exception.to_s,
       python_exception.__traceback__
     )
+  end
+
+  private_class_method def read_class_store(key)
+    Thread.current[key]
+  end
+
+  private_class_method def write_class_store(key, value)
+    Thread.current[key] = value
   end
 end
