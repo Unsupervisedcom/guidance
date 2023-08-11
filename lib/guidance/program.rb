@@ -16,7 +16,11 @@ module Guidance
       )
     end
 
-    def [](*args) = @python_guidance_program[*args]
+    def [](key) = variables[key]
+    
+    def []=(key, value)
+      @python_guidance_program.variables[key] = value
+    end
 
     def call(wrap_result: true, **kwargs)
       result = python_guidance_program.call(**kwargs).tap do |result|
@@ -33,9 +37,37 @@ module Guidance
       self
     end
 
-    def serialize = Guidance.serialize(self)
+    def prompt = python_guidance_program.to_s
+
+    # This returns the variables as a hash. Note that they are frozen.
+    # You can set individual values directly on Progam via []= but not
+    # via permuting the returned results in the hash
+    def variables
+      # We go through JSON to ensure we get Ruby types
+      json, llm = variables_json_and_llm
+      variables = JSON.parse(json).merge(llm: llm)
+      deep_freeze variables
+    end
 
     alias :run :call
     alias :run! :call!
+
+    private
+    def deep_freeze(obj)
+      if obj.is_a?(Hash)
+        obj.each_value { |v| deep_freeze(v) }
+      elsif obj.is_a?(Enumerable) && !obj.is_a?(String)
+        obj.each { |v| deep_freeze(v) }
+      end
+      obj.freeze
+    end
+
+    # LLM does not serialize so we return it separately
+    def variables_json_and_llm
+      variables = @python_guidance_program.variables
+      llm = variables.pop("llm")
+      json = PythonJson.dumps variables
+      [json, llm]
+    end
   end
 end

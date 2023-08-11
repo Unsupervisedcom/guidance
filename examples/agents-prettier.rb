@@ -47,8 +47,8 @@ democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republica
   democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republican: ', ''))
   # This is an extra demo section to demonstrate serializing and deserializing programs as it is an important
   # part of the flow that Guidance itself never really shows
-  # stored_republican = republican.serialize
-  # republican = Guidance.deserialize(stored_republican)
+  stored_republican = Guidance::Serializer.serialize republican
+  republican = Guidance::Serializer.deserialize stored_republican
 end
 puts('Democrat: ' + first_question)
 democrat['conversation'][0..-2].map do |x|

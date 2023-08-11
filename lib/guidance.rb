@@ -7,23 +7,28 @@ require_relative "guidance/version"
 # that we want in modules and then include them in the PyCall version.
 PythonGuidance = PyCall.import_module("guidance")
 Kernel.const_set :PythonGuidance, PythonGuidance
+PythonJson = PyCall.import_module("json")
+Kernel.const_set :PythonJson, PythonJson
 
 # Remember to load these AFTER defining PythonGuidance
 require_relative "guidance/program"
 require_relative "guidance/llms"
+require_relative "guidance/serializer"
 
 module Guidance
-  include Guidance::Serializer
   autoload :Program, "guidance/program"
   autoload :Version, "guidance/version"
   autoload :LLMs, "guidance/llms"
+  autoload :Serializer, "guidance/serializer"
 
   def self.llm=(llm)
-    write_class_store :llm, llm
+    Thread.current[:guidance_llm] = llm
     PythonGuidance.llm = llm
   end
 
-  def self.llm = read_class_store :llm
+  def self.llm
+    Thread.current[:guidance_llm]
+  end
 
   def self.llms = @llms ||= LLMs.new
 
@@ -38,13 +43,5 @@ module Guidance
       python_exception.to_s,
       python_exception.__traceback__
     )
-  end
-
-  private_class_method def read_class_store(key)
-    Thread.current[key]
-  end
-
-  private_class_method def write_class_store(key, value)
-    Thread.current[key] = value
   end
 end
