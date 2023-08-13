@@ -33,7 +33,7 @@ Comment: Remember, answer as a {{role}}. Start your utterance with {{role}}:
 {{#assistant~}}
 {{gen 'this.response' temperature=0 max_tokens=300}}
 {{~/assistant}}
-{{~/geneach}}'''
+{{~/geneach}}
 ))
 
 republican = role_simulator.call(role: 'Republican', await_missing: true)
