@@ -43,13 +43,16 @@ first_question = "What do you think is the best way to stop inflation?"
 republican.call!(input: first_question, first_question: nil)
 democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republican: ', ""), first_question: first_question)
 2.times do
-  republican.call!(input: democrat["conversation"][-2]["response"].gsub('Democrat: ', ''))
-  democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republican: ', ''))
   # This is an extra demo section to demonstrate serializing and deserializing programs as it is an important
   # part of the flow that Guidance itself never really shows
   stored_republican = Guidance::Serializer.serialize republican
-  republican = Guidance::Serializer.deserialize stored_republican
+  republican = Guidance::Serializer.deserialize stored_republican, llm: Guidance.llm
+
+  js = JSON.parse stored_republican
+  republican.call!(input: democrat["conversation"][-2]["response"].gsub('Democrat: ', ''))
+  democrat.call!(input: republican["conversation"][-2]["response"].gsub('Republican: ', ''))
 end
+
 puts('Democrat: ' + first_question)
 democrat['conversation'][0..-2].map do |x|
   puts("Republican: #{x['input']}")

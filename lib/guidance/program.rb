@@ -54,6 +54,7 @@ module Guidance
 
     private
     def deep_freeze(obj)
+      return obj if obj.respond_to? :__pyptr__ # Don't freeze PyCall objects
       if obj.is_a?(Hash)
         obj.each_value { |v| deep_freeze(v) }
       elsif obj.is_a?(Enumerable) && !obj.is_a?(String)
@@ -66,6 +67,7 @@ module Guidance
     def variables_json_and_llm
       variables = @python_guidance_program.variables
       llm = variables.pop("llm")
+      variables.pop("@raw_prefix")
       json = PythonJson.dumps variables
       [json, llm]
     end

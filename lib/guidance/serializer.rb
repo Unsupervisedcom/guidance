@@ -21,19 +21,22 @@ module Guidance
     def self.serialize(program, format: :json)
       serializer = SERIALIZERS[format.to_sym]
       raise ArgumentError, "Allowed formats are: #{SERIALIZERS.keys.join ", "}" unless serializer
-      
+      variables = program.variables.except(:llm)
+
       hash_of_state = {
-        ARGUMENTS_KEY => program.variables.to_h,
+        ARGUMENTS_KEY => variables.to_h,
         PROMPT_KEY => program.prompt
       }
       serializer.call hash_of_state
     end
 
-    def self.deserialize(serialized_form, format: :json, argument_overrides: {})
+    def self.deserialize(serialized_form, format: :json, **argument_overrides)
       deserializer = DESERIALIZERS[format.to_sym]
       raise ArgumentError, "Allowed formats are: #{DESERIALIZERS.keys.join ', '}" unless deserializer
 
       hash_of_state = deserializer.call serialized_form
+      #prog = Program.new(hash_of_state[PROMPT_KEY], **argument_overrides)
+      
       Program.new(hash_of_state[PROMPT_KEY], **hash_of_state[ARGUMENTS_KEY].merge(argument_overrides))
     end
   end
