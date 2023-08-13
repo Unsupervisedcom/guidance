@@ -5,5 +5,5 @@ set -vx
 
 which overcommit > /dev/null 2>&1 && overcommit --install
 bundle install
-pip install -U guidance
+pip install -U guidance -q
 
