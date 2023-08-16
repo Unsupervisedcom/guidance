@@ -35,8 +35,6 @@ module Guidance
       raise ArgumentError, "Allowed formats are: #{DESERIALIZERS.keys.join ', '}" unless deserializer
 
       hash_of_state = deserializer.call serialized_form
-      #prog = Program.new(hash_of_state[PROMPT_KEY], **argument_overrides)
-      
       Program.new(hash_of_state[PROMPT_KEY], **hash_of_state[ARGUMENTS_KEY].merge(argument_overrides))
     end
   end
