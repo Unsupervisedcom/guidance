@@ -44,8 +44,7 @@ module Guidance
     # via permuting the returned results in the hash
     def variables
       # We go through JSON to ensure we get Ruby types
-      json, llm = variables_json_and_llm
-      variables = JSON.parse(json).merge(llm: llm)
+      variables = JSON.parse(variables_json)
       deep_freeze variables
     end
 
@@ -64,12 +63,11 @@ module Guidance
     end
 
     # LLM does not serialize so we return it separately
-    def variables_json_and_llm
+    def variables_json
       variables = @python_guidance_program.variables
-      llm = variables.pop("llm")
+      variables.pop("llm")
       variables.pop("@raw_prefix")
-      json = PythonJson.dumps variables
-      [json, llm]
+      PythonJson.dumps variables
     end
   end
 end

@@ -21,7 +21,7 @@ module Guidance
     def self.serialize(program, format: :json)
       serializer = SERIALIZERS[format.to_sym]
       raise ArgumentError, "Allowed formats are: #{SERIALIZERS.keys.join ", "}" unless serializer
-      variables = program.variables.except(:llm)
+      variables = program.variables
 
       hash_of_state = {
         ARGUMENTS_KEY => variables.to_h,
