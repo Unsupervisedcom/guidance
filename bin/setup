@@ -5,5 +5,5 @@ set -vx
 
 which overcommit > /dev/null 2>&1 && overcommit --install
 bundle install
-pip install -U guidance -q
+pip install -U openai==0.28.1 guidance==0.0.65 -q
 
