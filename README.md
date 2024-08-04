@@ -1,3 +1,5 @@
+# DEPRECATED
+Microsoft spun out Guidance after this gem was released, and soon thereafter Guidance itself was updated to be more pure-python based and not used Handlebars. That makes it not worth trying to use from Ruby any longer, so this project is deprecated.
 # guidance
 
 [![Gem Version](https://img.shields.io/gem/v/guidance)](https://rubygems.org/gems/guidance)
